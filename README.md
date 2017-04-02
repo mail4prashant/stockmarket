@@ -6,30 +6,6 @@ It expose an api which client can use to do follwoing operation in stock market 
 - Record Trades for Stocks.
 - Calculate various importants results for stocks.
  
-There are following services available to simulate simple stock market exchange
-1. StockRefDataService
-
-This service should be used to perform reference data operation in stock market exchange. ie. adding stock, removing stock, getting stock etc.
-This service can be available using following code.
-
-IStockRefDataService refDataService = StockRefDataService.getInstance()
-
-2. TradeCaptureService
-
-This service should be used to capture trades in stock markets and find out trades for given stocks. record buy/sell side trade, query trades for stock
-This service can be available using following code.
-
-ITradeCaptureService tradeCaptureService = TradeCaptureService.getInstance()
-
-3. StockExchangeService
-
-This service should be used to get various different calculations in stock markets. 
-This service can be available using following code.
-
-	IStockRefDataService stockRefDataService = StockRefDataService.getInstance();
-	ITradeCaptureService tradeCaptureService = TradeCaptureService.getInstance();
-	IStockExchangeService stockExchangeService = new StockExchangeService(stockRefDataService, tradeCaptureService);
-	
 ## Getting Started
 
 
@@ -43,6 +19,32 @@ You need jdk 8, maven to compile, build and run the project.
 Clone the git repo and build the project using following maven command.
 
 mvn clean install
+
+### API usage
+
+Application expose following apis.
+1. IStockRefDataService
+
+This service should be used to perform reference data operation in stock market exchange. ie. adding stock, removing stock, getting stock etc.
+This service can be available using following code.
+
+IStockRefDataService refDataService = StockRefDataService.getInstance()
+
+2. ITradeCaptureService
+
+This service should be used to capture trades in stock markets and find out trades for given stocks. record buy/sell side trade, query trades for stock
+This service can be available using following code.
+
+ITradeCaptureService tradeCaptureService = TradeCaptureService.getInstance()
+
+3. IStockExchangeService
+
+This service should be used to get various different calculations in stock markets. 
+This service can be available using following code.
+
+	IStockRefDataService stockRefDataService = StockRefDataService.getInstance();
+	ITradeCaptureService tradeCaptureService = TradeCaptureService.getInstance();
+	IStockExchangeService stockExchangeService = new StockExchangeService(stockRefDataService, tradeCaptureService);
 
 ## Running the tests
 
