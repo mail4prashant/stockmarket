@@ -37,9 +37,9 @@ This service can be available using following code.
 
 ITradeCaptureService tradeCaptureService = StockExchangeServiceFactory.getTradeCaptureService()
 
-3. IStockExchangeService
+3. IStockExchangeAnalyticsService
 
-This service should be used to get various different calculations in stock markets. 
+This service should be used to get various analytics in stock markets. 
 This service can be available using following code.
 
 	IStockExchangeAnalyticsService stockExchangeAnalyticsService = StockExchangeServiceFactory.getStockExchangeAnalyticsService();
@@ -54,7 +54,7 @@ mvn test
 
 There are following unit tests.
 
-StockExchangeServiceTest : This unit test tests IStockExchangeService methods.  
+StockExchangeAnalyticsServiceTest : This unit test tests IStockExchangeAnalyticsService methods.  
 
 StockRefDataServiceTest : This unit test tests IStockRefDataService methods. 
 
