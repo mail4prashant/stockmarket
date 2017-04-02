@@ -53,7 +53,10 @@ mvn test
 ### Unit Tests description
 
 There are following unit tests.
+
 StockExchangeServiceTest : This unit test tests StockExchangeService methods.  
+
 StockRefDataServiceTest : This unit test tests StockRefDataService methods. 
+
 TradeCaptureServiceTest : This unit test tests TradeCaptureService methods.
 
