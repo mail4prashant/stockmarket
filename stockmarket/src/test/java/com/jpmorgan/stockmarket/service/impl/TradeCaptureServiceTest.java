@@ -15,9 +15,11 @@ import com.jpmorgan.stockmarket.dto.Stock;
 import com.jpmorgan.stockmarket.dto.Trade;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.service.api.ITradeCaptureService;
-import com.jpmorgan.stockmarket.type.StockType;
 
 
+/**
+ * The Class tests {@link ITradeCaptureService}.
+ */
 public class TradeCaptureServiceTest extends AbstractStockMarketTest {
 	
 	private static final String RECORD_TRADE_DATA_PROVIDER = "TradeCaptureServiceTest.testRecordTrade";
@@ -32,6 +34,11 @@ public class TradeCaptureServiceTest extends AbstractStockMarketTest {
 		tradeCaptureService.clearAllStockTrades();
 	}
 
+	/**
+	 * Test {@link ITradeCaptureService#recordBuySideTrade(Stock, long, double)}.
+	 *
+	 * @param testData the test data
+	 */
 	@Test(dataProvider = RECORD_TRADE_DATA_PROVIDER)
 	public void testRecordBuySideTrade(TradeTestData testData) {
 		Stock stock = refDataService.addCommonStock(testData.stock.symbol, testData.stock.lastDividendInPennies, testData.stock.parValueInPennies);
@@ -40,6 +47,11 @@ public class TradeCaptureServiceTest extends AbstractStockMarketTest {
 		assertThat("Received trade size is not equal to recorded trade size.", tradeCaptureService.getTrades(stock).size() == 1);
 	}
 
+	/**
+	 * Test {@link ITradeCaptureService#recordSellSideTrade(Stock, long, double)}.
+	 *
+	 * @param testData the test data
+	 */
 	@Test(dataProvider = RECORD_TRADE_DATA_PROVIDER)
 	public void testRecordSellSideTrade(TradeTestData testData) {
 		Stock stock = refDataService.addCommonStock(testData.stock.symbol, testData.stock.lastDividendInPennies, testData.stock.parValueInPennies);
@@ -49,6 +61,11 @@ public class TradeCaptureServiceTest extends AbstractStockMarketTest {
 		assertThat("Received trade size is not equal to recorded trade size.", tradeCaptureService.getTrades(stock).size() == 1);
 	}
 	
+	/**
+	 * Test {@link ITradeCaptureService#getRecentTrades(Stock, long, ChronoUnit)}.
+	 *
+	 * @param testData the test data
+	 */
 	@Test(dataProvider = GET_RECENT_TRADE_DATA_PROVIDER)
 	public void testGetRecentTrades(TradeTestData testData) {
 		Stock stock = recordTrades(testData);

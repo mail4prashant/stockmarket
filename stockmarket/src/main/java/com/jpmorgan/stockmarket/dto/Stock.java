@@ -2,6 +2,9 @@ package com.jpmorgan.stockmarket.dto;
 
 import com.jpmorgan.stockmarket.type.StockType;
 
+/**
+ * This class represent a Stock in stock market exchange.
+ */
 public class Stock {
 
 	private final String symbol;
@@ -14,6 +17,15 @@ public class Stock {
 
 	private final double parValueInPennies;
 
+	/**
+	 * Instantiates a new stock.
+	 *
+	 * @param symbol the symbol
+	 * @param type the type
+	 * @param lastDividendInPennies the last dividend in pennies
+	 * @param fixedDividendInPercentage the fixed dividend in percentage
+	 * @param parValueInPennies the par value in pennies
+	 */
 	public Stock(String symbol, StockType type, double lastDividendInPennies, double fixedDividendInPercentage,
 			double parValueInPennies) {
 		this.symbol = symbol;
@@ -23,27 +35,57 @@ public class Stock {
 		this.parValueInPennies = parValueInPennies;
 	}
 
+	/**
+	 * Gets the symbol.
+	 *
+	 * @return the symbol
+	 */
 	public String getSymbol() {
 		return symbol;
 	}
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public StockType getType() {
 		return type;
 	}
 
+	/**
+	 * Gets the last dividend in pennies.
+	 *
+	 * @return the last dividend in pennies
+	 */
 	public double getLastDividendInPennies() {
 		return lastDividendInPennies;
 	}
 
+	/**
+	 * Gets the fixed dividend in percentage.
+	 *
+	 * @return the fixed dividend in percentage
+	 */
 	public double getFixedDividendInPercentage() {
 		return fixedDividendInPercentage;
 	}
 
+	/**
+	 * Gets the par value in pennies.
+	 *
+	 * @return the par value in pennies
+	 */
 	public double getParValueInPennies() {
 		return parValueInPennies;
 	}
 
-	public double getDivident() {
+	/**
+	 * Gets the dividend.
+	 *
+	 * @return the dividend
+	 */
+	public double getDividend() {
 		if (type == StockType.PREFERRED) {
 			return fixedDividendInPercentage * parValueInPennies;
 		} else if (type == StockType.COMMON) {
@@ -52,12 +94,24 @@ public class Stock {
 		return Double.NaN;
 	}
 
-	public double getDividentYield(double price) {
-		return getDivident() / price;
+	/**
+	 * Gets the dividend yield.
+	 *
+	 * @param price the price
+	 * @return the dividend yield
+	 */
+	public double getDividendYield(double price) {
+		return getDividend() / price;
 	}
 
+	/**
+	 * Gets the pe ratio.
+	 *
+	 * @param price the price
+	 * @return the pe ratio
+	 */
 	public double getPeRatio(double price) {
-		return price / getDivident();
+		return price / getDividend();
 	}
 
 	@Override
@@ -89,7 +143,5 @@ public class Stock {
 	public String toString() {
 		return "Stock [symbol=" + symbol + ", type=" + type + "]";
 	}
-	
-	
 	
 }

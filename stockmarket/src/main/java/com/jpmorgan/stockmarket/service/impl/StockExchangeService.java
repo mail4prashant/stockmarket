@@ -11,6 +11,9 @@ import com.jpmorgan.stockmarket.service.api.IStockExchangeService;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.service.api.ITradeCaptureService;
 
+/**
+ * Simple Implementation of {@link IStockExchangeService}.
+ */
 public class StockExchangeService implements IStockExchangeService {
 
 	private static final long TIME_IN_MINUTES_TO_CALC_VOL_WGHTED_STOCK_PRICE = 5;
@@ -23,18 +26,22 @@ public class StockExchangeService implements IStockExchangeService {
 		this.tradeCaptureService = tradeCaptureService;
 	}
 
-	public double getDividentYield(String stockSymbol, double priceInPennies) {
-		return stockRefDataService.getStock(stockSymbol).getDividentYield(priceInPennies);
+	@Override
+	public double getDividendYield(String stockSymbol, double priceInPennies) {
+		return stockRefDataService.getStock(stockSymbol).getDividendYield(priceInPennies);
 	}
 
+	@Override
 	public double getPeRatio(String stockSymbol, double priceInPennies) {
 		return stockRefDataService.getStock(stockSymbol).getPeRatio(priceInPennies);
 	}
 
+	@Override
 	public double getVolumeWeightedStockPrice(String stockSymbol) {
 		return getVolumeWeightedStockPrice(stockRefDataService.getStock(stockSymbol));
 	}
 
+	@Override
 	public double getAllShareIndex() {
 		Collection<Stock> stocks = stockRefDataService.getAllStocks();
 		double product = stocks.stream().mapToDouble(this::getVolumeWeightedStockPrice).reduce(1, (a, b) -> a * b);

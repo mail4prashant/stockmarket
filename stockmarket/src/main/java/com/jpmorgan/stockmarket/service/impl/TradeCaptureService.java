@@ -15,9 +15,13 @@ import java.util.stream.Collectors;
 
 import com.jpmorgan.stockmarket.dto.Stock;
 import com.jpmorgan.stockmarket.dto.Trade;
+import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.service.api.ITradeCaptureService;
 import com.jpmorgan.stockmarket.type.BuySellIndicatorType;
 
+/**
+ * InMemory based implementation of {@link ITradeCaptureService}.
+ */
 public class TradeCaptureService implements ITradeCaptureService {
 
 	private static final Comparator<Trade> TRADE_CREATION_TIME_COMPARATOR = (t1, t2) -> t1.getCreatedOn().compareTo(t2.getCreatedOn());

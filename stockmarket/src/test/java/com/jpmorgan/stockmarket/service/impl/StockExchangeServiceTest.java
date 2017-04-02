@@ -14,10 +14,12 @@ import com.jpmorgan.stockmarket.service.api.IStockExchangeService;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.service.api.ITradeCaptureService;
 
-
+/**
+ * The Class tests {@link IStockExchangeService}.
+ */
 public class StockExchangeServiceTest extends AbstractStockMarketTest {
 	
-	private static final String GET_DIVIDENT_YIELD_DATA_PROVIDER = "TradeCaptureServiceTest.testGetDividentYield";
+	private static final String GET_DIVIDEND_YIELD_DATA_PROVIDER = "TradeCaptureServiceTest.testGetDividendYield";
 	private static final String GET_PE_RATIO_DATA_PROVIDER = "TradeCaptureServiceTest.testGetPeRatio";
 	private static final String GET_VOL_WGHT_STOCK_PRICE_DATA_PROVIDER = "TradeCaptureServiceTest.testVolumeWeightedStockPrice";
 	private static final String GET_ALL_SHARE_INDEX_DATA_PROVIDER = "TradeCaptureServiceTest.testGetAllShareIndex";
@@ -36,18 +38,33 @@ public class StockExchangeServiceTest extends AbstractStockMarketTest {
 		stockRefDataService.addCommonStock("JOE", 13, 250);
 	}
 
-	@Test(dataProvider = GET_DIVIDENT_YIELD_DATA_PROVIDER)
-	public void testGetDividentYield(DividentTestData testData) {
-		double yield = stockExchangeService.getDividentYield(testData.symbol, testData.price);
-		assertThat("calculated yield is not same as expected yield", equal(yield, testData.expectedDividentYield));
+	/**
+	 * Test {@link IStockExchangeService#getDividendYield(String, double)}.
+	 *
+	 * @param testData the test data
+	 */
+	@Test(dataProvider = GET_DIVIDEND_YIELD_DATA_PROVIDER)
+	public void testGetDividendYield(DividendTestData testData) {
+		double yield = stockExchangeService.getDividendYield(testData.symbol, testData.price);
+		assertThat("calculated yield is not same as expected yield", equal(yield, testData.expectedDividendYield));
 	}
 
+	/**
+	 * Test {@link IStockExchangeService#getPeRatio(String, double)}.
+	 *
+	 * @param testData the test data
+	 */
 	@Test(dataProvider = GET_PE_RATIO_DATA_PROVIDER)
 	public void testGetPeRatio(PeRatioTestData testData) {
 		double peRatio = stockExchangeService.getPeRatio(testData.symbol, testData.price);
 		assertThat("calculated PERatio is not same as expected PE Ratio", equal(peRatio, testData.expectedRatio));
 	}
 
+	/**
+	 * Test {@link IStockExchangeService#getVolumeWeightedStockPrice(String)}.
+	 *
+	 * @param testData the test data
+	 */
 	@Test(dataProvider = GET_VOL_WGHT_STOCK_PRICE_DATA_PROVIDER)
 	public void testVolumeWeightedStockPrice(VolumeWeightedStockPriceTestData testData) {
 		testData.trades.forEach(trade -> {
@@ -61,6 +78,11 @@ public class StockExchangeServiceTest extends AbstractStockMarketTest {
 				equal(volumeWeightedStockPrice, testData.expectedVolumeWeightedStockPrice));
 	}
 
+	/**
+	 * Test {@link IStockExchangeService#getAllShareIndex()}.
+	 *
+	 * @param testData the test data
+	 */
 	@Test(dataProvider = GET_ALL_SHARE_INDEX_DATA_PROVIDER)
 	public void testGetAllShareIndex(AllShareIndexTestData testData) {
 		testData.trades.forEach(trade -> {
@@ -74,18 +96,18 @@ public class StockExchangeServiceTest extends AbstractStockMarketTest {
 				equal(volumeWeightedStockPrice, testData.expectedAllShareIndex));
 	}
 
-	@DataProvider(name = GET_DIVIDENT_YIELD_DATA_PROVIDER)
-    private static Object[][] getDividentYieldTestData() {
+	@DataProvider(name = GET_DIVIDEND_YIELD_DATA_PROVIDER)
+    private static Object[][] getDividendYieldTestData() {
         return DataProviderItemBase.transformData(
-                new DividentTestData("case 1")
+                new DividendTestData("case 1")
                 .withStock("TEA", 100, 0),
-                new DividentTestData("case 2")
+                new DividendTestData("case 2")
                 .withStock("POP", 100, 0.08),
-                new DividentTestData("case 3")
+                new DividendTestData("case 3")
                 .withStock("ALE", 100, 0.23),
-                new DividentTestData("case 4")
+                new DividendTestData("case 4")
                 .withStock("GIN", 100, 2),
-                new DividentTestData("case 5")
+                new DividendTestData("case 5")
                 .withStock("JOE", 100, .13)
                 
         );
@@ -151,19 +173,19 @@ public class StockExchangeServiceTest extends AbstractStockMarketTest {
         );
     }
 	
-	static class DividentTestData extends DataProviderItem {
+	static class DividendTestData extends DataProviderItem {
 		private String symbol;
 		private double price;
-		private double expectedDividentYield;
+		private double expectedDividendYield;
 		
-		public DividentTestData(String caseDescription) {
+		public DividendTestData(String caseDescription) {
 			super(caseDescription);
 		}
 
-		public DividentTestData withStock(String symbol, double price, double expectedDividentYield) {
+		public DividendTestData withStock(String symbol, double price, double expectedDividendYield) {
 			this.symbol = symbol;
 			this.price = price;
-			this.expectedDividentYield = expectedDividentYield;
+			this.expectedDividendYield = expectedDividendYield;
 			return this;
 		}
 	}

@@ -9,6 +9,9 @@ import com.jpmorgan.stockmarket.dto.Stock;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.type.StockType;
 
+/**
+ * InMemory based implementation of {@link IStockRefDataService}.
+ */
 public class StockRefDataService implements IStockRefDataService {
 
 	private static class SingletonHolder {
@@ -35,16 +38,6 @@ public class StockRefDataService implements IStockRefDataService {
 		return addStock(stock);
 	}
 
-	private Stock addStock(Stock stock) {
-		stockBySymbolMap.putIfAbsent(stock.getSymbol(), stock);
-		return stock;
-	}
-	
-//	@Override
-//	public void addAllStocks(Collection<Stock> stocks) {
-//		stocks.forEach(this::addStock);
-//	}
-
 	@Override
 	public Stock getStock(String stockSymbol) {
 		Stock stock = stockBySymbolMap.get(stockSymbol);
@@ -67,6 +60,11 @@ public class StockRefDataService implements IStockRefDataService {
 	@Override
 	public void removeAllStocks() {
 		stockBySymbolMap.clear();
+	}
+
+	private Stock addStock(Stock stock) {
+		stockBySymbolMap.putIfAbsent(stock.getSymbol(), stock);
+		return stock;
 	}
 
 	public static StockRefDataService getInstance() {

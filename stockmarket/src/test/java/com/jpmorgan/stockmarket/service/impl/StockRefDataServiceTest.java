@@ -10,7 +10,9 @@ import com.jpmorgan.stockmarket.dto.Stock;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.type.StockType;
 
-
+/**
+ * The Class tests {@link IStockRefDataService}.
+ */
 public class StockRefDataServiceTest extends AbstractStockMarketTest {
 	
 	private static final String ADD_COMMON_STOCK_DATA_PROVIDER = "StockRefDataServiceTest.testAddCommonStock";
@@ -23,6 +25,11 @@ public class StockRefDataServiceTest extends AbstractStockMarketTest {
 		refDataService.removeAllStocks();
 	}
 
+	/**
+	 * Test {@link IStockRefDataService#addCommonStock(String, double, double)}.
+	 *
+	 * @param testData the test data
+	 */
 	@Test(dataProvider = ADD_COMMON_STOCK_DATA_PROVIDER)
 	public void testAddCommonStock(StockTestData testData) {
 		Stock stock = refDataService.addCommonStock(testData.stock.symbol, testData.stock.lastDividendInPennies, testData.stock.parValueInPennies);
@@ -35,6 +42,11 @@ public class StockRefDataServiceTest extends AbstractStockMarketTest {
 		assertThat("Received stock par value is not matching.", equal(stock.getParValueInPennies(), testData.stock.parValueInPennies));
 	}
 
+	/**
+	 * Test {@link IStockRefDataService#addPreferredStock(String, double, double, double)}.
+	 *
+	 * @param testData the test data
+	 */
 	@Test(dataProvider = ADD_PREFERRED_STOCK_DATA_PROVIDER)
 	public void testAddPreferredStock(StockTestData testData) {
 		Stock stock = refDataService.addPreferredStock(testData.stock.symbol, testData.stock.lastDividendInPennies, testData.stock.fixedDividendInPercentage, testData.stock.parValueInPennies);
