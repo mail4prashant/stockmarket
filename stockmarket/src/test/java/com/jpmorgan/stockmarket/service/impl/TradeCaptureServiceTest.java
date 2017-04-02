@@ -15,6 +15,7 @@ import com.jpmorgan.stockmarket.dto.Stock;
 import com.jpmorgan.stockmarket.dto.Trade;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.service.api.ITradeCaptureService;
+import com.jpmorgan.stockmarket.service.api.StockExchangeServiceFactory;
 
 
 /**
@@ -25,8 +26,8 @@ public class TradeCaptureServiceTest extends AbstractStockMarketTest {
 	private static final String RECORD_TRADE_DATA_PROVIDER = "TradeCaptureServiceTest.testRecordTrade";
 	private static final String GET_RECENT_TRADE_DATA_PROVIDER = "TradeCaptureServiceTest.testRecentTrades";
 	
-	private final IStockRefDataService refDataService = StockRefDataService.getInstance();
-	private final ITradeCaptureService tradeCaptureService = TradeCaptureService.getInstance();
+	private final IStockRefDataService refDataService = StockExchangeServiceFactory.getStockRefDataService();
+	private final ITradeCaptureService tradeCaptureService = StockExchangeServiceFactory.getTradeCaptureService();
 	
 
 	@BeforeMethod

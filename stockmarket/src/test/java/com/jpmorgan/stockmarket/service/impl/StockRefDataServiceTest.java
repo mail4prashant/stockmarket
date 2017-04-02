@@ -8,6 +8,7 @@ import com.jpmorgan.stockmarket.common.DataProviderItem;
 import com.jpmorgan.stockmarket.common.DataProviderItemBase;
 import com.jpmorgan.stockmarket.dto.Stock;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
+import com.jpmorgan.stockmarket.service.api.StockExchangeServiceFactory;
 import com.jpmorgan.stockmarket.type.StockType;
 
 /**
@@ -18,7 +19,7 @@ public class StockRefDataServiceTest extends AbstractStockMarketTest {
 	private static final String ADD_COMMON_STOCK_DATA_PROVIDER = "StockRefDataServiceTest.testAddCommonStock";
 	private static final String ADD_PREFERRED_STOCK_DATA_PROVIDER = "StockRefDataServiceTest.testAddPreferredStock";
 	
-	private final IStockRefDataService refDataService = StockRefDataService.getInstance();
+	private final IStockRefDataService refDataService = StockExchangeServiceFactory.getStockRefDataService();
 
 	@BeforeMethod
 	public void clearAllStocks() {

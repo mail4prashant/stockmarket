@@ -7,21 +7,21 @@ import java.util.function.ToDoubleFunction;
 
 import com.jpmorgan.stockmarket.dto.Stock;
 import com.jpmorgan.stockmarket.dto.Trade;
-import com.jpmorgan.stockmarket.service.api.IStockExchangeService;
+import com.jpmorgan.stockmarket.service.api.IStockExchangeAnalyticsService;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.service.api.ITradeCaptureService;
 
 /**
- * Simple Implementation of {@link IStockExchangeService}.
+ * Simple Implementation of {@link IStockExchangeAnalyticsService}.
  */
-public class StockExchangeService implements IStockExchangeService {
+public class StockExchangeAnalyticsService implements IStockExchangeAnalyticsService {
 
 	private static final long TIME_IN_MINUTES_TO_CALC_VOL_WGHTED_STOCK_PRICE = 5;
 
 	private final IStockRefDataService stockRefDataService;
 	private final ITradeCaptureService tradeCaptureService;
 
-	public StockExchangeService(IStockRefDataService stockRefDataService, ITradeCaptureService tradeCaptureService) {
+	public StockExchangeAnalyticsService(IStockRefDataService stockRefDataService, ITradeCaptureService tradeCaptureService) {
 		this.stockRefDataService = stockRefDataService;
 		this.tradeCaptureService = tradeCaptureService;
 	}

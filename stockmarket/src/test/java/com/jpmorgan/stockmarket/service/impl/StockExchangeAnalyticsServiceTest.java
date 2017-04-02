@@ -10,23 +10,24 @@ import org.testng.annotations.Test;
 import com.jpmorgan.stockmarket.common.DataProviderItem;
 import com.jpmorgan.stockmarket.common.DataProviderItemBase;
 import com.jpmorgan.stockmarket.dto.Stock;
-import com.jpmorgan.stockmarket.service.api.IStockExchangeService;
+import com.jpmorgan.stockmarket.service.api.IStockExchangeAnalyticsService;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.service.api.ITradeCaptureService;
+import com.jpmorgan.stockmarket.service.api.StockExchangeServiceFactory;
 
 /**
- * The Class tests {@link IStockExchangeService}.
+ * The Class tests {@link IStockExchangeAnalyticsService}.
  */
-public class StockExchangeServiceTest extends AbstractStockMarketTest {
+public class StockExchangeAnalyticsServiceTest extends AbstractStockMarketTest {
 	
 	private static final String GET_DIVIDEND_YIELD_DATA_PROVIDER = "TradeCaptureServiceTest.testGetDividendYield";
 	private static final String GET_PE_RATIO_DATA_PROVIDER = "TradeCaptureServiceTest.testGetPeRatio";
 	private static final String GET_VOL_WGHT_STOCK_PRICE_DATA_PROVIDER = "TradeCaptureServiceTest.testVolumeWeightedStockPrice";
 	private static final String GET_ALL_SHARE_INDEX_DATA_PROVIDER = "TradeCaptureServiceTest.testGetAllShareIndex";
 	
-	private final IStockRefDataService stockRefDataService = StockRefDataService.getInstance();
-	private final ITradeCaptureService tradeCaptureService = TradeCaptureService.getInstance();
-	private final IStockExchangeService stockExchangeService = new StockExchangeService(stockRefDataService, tradeCaptureService);
+	private final IStockRefDataService stockRefDataService = StockExchangeServiceFactory.getStockRefDataService();
+	private final ITradeCaptureService tradeCaptureService = StockExchangeServiceFactory.getTradeCaptureService();
+	private final IStockExchangeAnalyticsService stockExchangeAnalyticsService = StockExchangeServiceFactory.getStockExchangeAnalyticsService();
 
 	@BeforeMethod
 	public void clearAllTrades() {
@@ -39,29 +40,29 @@ public class StockExchangeServiceTest extends AbstractStockMarketTest {
 	}
 
 	/**
-	 * Test {@link IStockExchangeService#getDividendYield(String, double)}.
+	 * Test {@link IStockExchangeAnalyticsService#getDividendYield(String, double)}.
 	 *
 	 * @param testData the test data
 	 */
 	@Test(dataProvider = GET_DIVIDEND_YIELD_DATA_PROVIDER)
 	public void testGetDividendYield(DividendTestData testData) {
-		double yield = stockExchangeService.getDividendYield(testData.symbol, testData.price);
+		double yield = stockExchangeAnalyticsService.getDividendYield(testData.symbol, testData.price);
 		assertThat("calculated yield is not same as expected yield", equal(yield, testData.expectedDividendYield));
 	}
 
 	/**
-	 * Test {@link IStockExchangeService#getPeRatio(String, double)}.
+	 * Test {@link IStockExchangeAnalyticsService#getPeRatio(String, double)}.
 	 *
 	 * @param testData the test data
 	 */
 	@Test(dataProvider = GET_PE_RATIO_DATA_PROVIDER)
 	public void testGetPeRatio(PeRatioTestData testData) {
-		double peRatio = stockExchangeService.getPeRatio(testData.symbol, testData.price);
+		double peRatio = stockExchangeAnalyticsService.getPeRatio(testData.symbol, testData.price);
 		assertThat("calculated PERatio is not same as expected PE Ratio", equal(peRatio, testData.expectedRatio));
 	}
 
 	/**
-	 * Test {@link IStockExchangeService#getVolumeWeightedStockPrice(String)}.
+	 * Test {@link IStockExchangeAnalyticsService#getVolumeWeightedStockPrice(String)}.
 	 *
 	 * @param testData the test data
 	 */
@@ -72,14 +73,14 @@ public class StockExchangeServiceTest extends AbstractStockMarketTest {
 			tradeCaptureService.recordBuySideTrade(stock, trade.noOfShares, trade.priceInPennies);
 		});
 
-		double volumeWeightedStockPrice = stockExchangeService.getVolumeWeightedStockPrice(testData.symbol);
+		double volumeWeightedStockPrice = stockExchangeAnalyticsService.getVolumeWeightedStockPrice(testData.symbol);
 
 		assertThat("calculated VolumeWeightedStockPrice is not same as expected VolumeWeightedStockPrice",
 				equal(volumeWeightedStockPrice, testData.expectedVolumeWeightedStockPrice));
 	}
 
 	/**
-	 * Test {@link IStockExchangeService#getAllShareIndex()}.
+	 * Test {@link IStockExchangeAnalyticsService#getAllShareIndex()}.
 	 *
 	 * @param testData the test data
 	 */
@@ -90,7 +91,7 @@ public class StockExchangeServiceTest extends AbstractStockMarketTest {
 			tradeCaptureService.recordBuySideTrade(stock, trade.noOfShares, trade.priceInPennies);
 		});
 
-		double volumeWeightedStockPrice = stockExchangeService.getAllShareIndex();
+		double volumeWeightedStockPrice = stockExchangeAnalyticsService.getAllShareIndex();
 
 		assertThat("calculated AllShare Index is not same as expected AllShare Index",
 				equal(volumeWeightedStockPrice, testData.expectedAllShareIndex));

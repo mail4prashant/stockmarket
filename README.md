@@ -22,29 +22,27 @@ mvn clean install
 
 ### API usage
 
-Application expose following apis.
+Application expose following different services which can be retrieved from StockExchangeServiceFactory. 
 1. IStockRefDataService
 
 This service should be used to perform reference data operation in stock market exchange. ie. adding stock, removing stock, getting stock etc.
 This service can be available using following code.
 
-IStockRefDataService refDataService = StockRefDataService.getInstance()
+IStockRefDataService stockRefDataService = StockExchangeServiceFactory.getStockRefDataService()
 
 2. ITradeCaptureService
 
 This service should be used to capture trades in stock markets and find out trades for given stocks. record buy/sell side trade, query trades for stock
 This service can be available using following code.
 
-ITradeCaptureService tradeCaptureService = TradeCaptureService.getInstance()
+ITradeCaptureService tradeCaptureService = StockExchangeServiceFactory.getTradeCaptureService()
 
 3. IStockExchangeService
 
 This service should be used to get various different calculations in stock markets. 
 This service can be available using following code.
 
-	IStockRefDataService stockRefDataService = StockRefDataService.getInstance();
-	ITradeCaptureService tradeCaptureService = TradeCaptureService.getInstance();
-	IStockExchangeService stockExchangeService = new StockExchangeService(stockRefDataService, tradeCaptureService);
+	IStockExchangeAnalyticsService stockExchangeAnalyticsService = StockExchangeServiceFactory.getStockExchangeAnalyticsService();
 
 ## Running the tests
 
@@ -56,9 +54,9 @@ mvn test
 
 There are following unit tests.
 
-StockExchangeServiceTest : This unit test tests StockExchangeService methods.  
+StockExchangeServiceTest : This unit test tests IStockExchangeService methods.  
 
-StockRefDataServiceTest : This unit test tests StockRefDataService methods. 
+StockRefDataServiceTest : This unit test tests IStockRefDataService methods. 
 
-TradeCaptureServiceTest : This unit test tests TradeCaptureService methods.
+TradeCaptureServiceTest : This unit test tests ITradeCaptureService methods.
 

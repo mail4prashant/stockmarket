@@ -1,9 +1,10 @@
 package com.jpmorgan.stockmarket.service.api;
 
 /**
- * This service provides various methods to calculate important numbers in stock markets.  
+ * This service provides various analytics methods to calculate important analytics in stock markets.
+ *   
  */
-public interface IStockExchangeService {
+public interface IStockExchangeAnalyticsService {
 
 	/**
 	 * Gets the dividend yield for given stock and price.
