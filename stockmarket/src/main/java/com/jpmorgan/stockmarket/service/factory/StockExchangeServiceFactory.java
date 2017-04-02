@@ -1,5 +1,8 @@
-package com.jpmorgan.stockmarket.service.api;
+package com.jpmorgan.stockmarket.service.factory;
 
+import com.jpmorgan.stockmarket.service.api.IStockExchangeAnalyticsService;
+import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
+import com.jpmorgan.stockmarket.service.api.ITradeCaptureService;
 import com.jpmorgan.stockmarket.service.impl.StockExchangeAnalyticsService;
 import com.jpmorgan.stockmarket.service.impl.StockRefDataService;
 import com.jpmorgan.stockmarket.service.impl.TradeCaptureService;

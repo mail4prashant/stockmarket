@@ -8,7 +8,7 @@ import com.jpmorgan.stockmarket.common.DataProviderItem;
 import com.jpmorgan.stockmarket.common.DataProviderItemBase;
 import com.jpmorgan.stockmarket.dto.Stock;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
-import com.jpmorgan.stockmarket.service.api.StockExchangeServiceFactory;
+import com.jpmorgan.stockmarket.service.factory.StockExchangeServiceFactory;
 import com.jpmorgan.stockmarket.type.StockType;
 
 /**

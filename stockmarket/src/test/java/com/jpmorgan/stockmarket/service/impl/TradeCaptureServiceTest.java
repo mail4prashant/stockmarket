@@ -15,7 +15,7 @@ import com.jpmorgan.stockmarket.dto.Stock;
 import com.jpmorgan.stockmarket.dto.Trade;
 import com.jpmorgan.stockmarket.service.api.IStockRefDataService;
 import com.jpmorgan.stockmarket.service.api.ITradeCaptureService;
-import com.jpmorgan.stockmarket.service.api.StockExchangeServiceFactory;
+import com.jpmorgan.stockmarket.service.factory.StockExchangeServiceFactory;
 
 
 /**
